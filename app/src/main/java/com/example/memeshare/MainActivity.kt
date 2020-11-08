@@ -1,5 +1,6 @@
 package com.example.memeshare
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -24,7 +27,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Toast.makeText(this, "You can also Swipe for Next Meme", Toast.LENGTH_SHORT).show()
         loadMeme()
+        val layout: ConstraintLayout = findViewById(R.id.layout)
+        layout.setOnTouchListener(object : OnSwipeTouchListener(this@MainActivity) {
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                nextButton.callOnClick()
+            }
+        })
     }
 
     private fun loadMeme() {
