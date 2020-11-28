@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (supportActionBar != null)
+            supportActionBar?.hide()
         Toast.makeText(this, "You can also Swipe for Next Meme", Toast.LENGTH_SHORT).show()
         loadMeme()
         val layout: ConstraintLayout = findViewById(R.id.layout)
